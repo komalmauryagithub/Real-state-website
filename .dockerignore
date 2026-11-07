@@ -1,0 +1,18 @@
+# Docker build ignore rules
+.git/
+.gitignore
+.env
+.env.local
+scratch/
+.system_generated/
+*.log
+*.tmp
+*.bak
+mysql_data/
+db_data/
+docker-compose.override.yml
+.docker/
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

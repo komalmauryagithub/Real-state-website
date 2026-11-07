@@ -1,0 +1,24 @@
+# =============================================================================
+# EstateVista India - Search Engine Crawler Directives
+# =============================================================================
+User-agent: *
+Allow: /
+Allow: /index.php
+Allow: /properties.php
+Allow: /property-detail.php
+Allow: /list-property.php
+Allow: /about.php
+Allow: /contact.php
+
+# Disallow private administrative, API, and sensitive system folders
+Disallow: /admin/
+Disallow: /api/
+Disallow: /config/
+Disallow: /database/
+Disallow: /includes/
+Disallow: /scratch/
+Disallow: /uploads/temp/
+
+# XML Sitemaps
+Sitemap: sitemap.xml
+Sitemap: sitemap.php

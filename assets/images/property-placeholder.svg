@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#081020" />
+      <stop offset="50%" stop-color="#0b1528" />
+      <stop offset="100%" stop-color="#050a14" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e6c8" />
+      <stop offset="40%" stop-color="#d4af37" />
+      <stop offset="70%" stop-color="#aa820a" />
+      <stop offset="100%" stop-color="#e5c158" />
+    </linearGradient>
+    <pattern id="archGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(212, 175, 55, 0.05)" stroke-width="1" />
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="rgba(212, 175, 55, 0.15)" />
+      <stop offset="100%" stop-color="rgba(8, 16, 32, 0)" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#archGrid)" />
+  <circle cx="400" cy="220" r="180" fill="url(#glow)" />
+
+  <!-- Outer Border Frame -->
+  <rect x="20" y="20" width="760" height="460" rx="8" fill="none" stroke="url(#goldGrad)" stroke-width="1" stroke-opacity="0.3" />
+  <rect x="28" y="28" width="744" height="444" rx="6" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1" />
+
+  <!-- Corner Accents -->
+  <path d="M 20 50 L 20 20 L 50 20" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+  <path d="M 750 20 L 780 20 L 780 50" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+  <path d="M 20 450 L 20 480 L 50 480" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+  <path d="M 750 480 L 780 480 L 780 450" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+
+  <!-- Architectural Icon -->
+  <g transform="translate(340, 140)">
+    <!-- Central Tower / Penthouse -->
+    <path d="M 60 10 L 100 45 L 100 130 L 20 130 L 20 45 Z" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linejoin="round" />
+    <path d="M 60 10 L 60 130" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-opacity="0.5" />
+    <!-- Spire -->
+    <line x1="60" y1="0" x2="60" y2="10" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Left Wing -->
+    <path d="M 0 65 L 20 50 L 20 130 L 0 130 Z" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-linejoin="round" />
+    <!-- Right Wing -->
+    <path d="M 120 65 L 100 50 L 100 130 L 120 130 Z" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-linejoin="round" />
+    <!-- Architectural Windows -->
+    <rect x="35" y="60" width="12" height="18" rx="2" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" />
+    <rect x="73" y="60" width="12" height="18" rx="2" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" />
+    <rect x="35" y="90" width="12" height="18" rx="2" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" />
+    <rect x="73" y="90" width="12" height="18" rx="2" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" />
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="400" y="325" text-anchor="middle" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="24" font-weight="700" fill="url(#goldGrad)" letter-spacing="4">ESTATEVISTA</text>
+  <text x="400" y="352" text-anchor="middle" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="12" font-weight="600" fill="#94a3b8" letter-spacing="3" text-transform="uppercase">CURATED LUXURY RESIDENCE</text>
+  <line x1="320" y1="370" x2="480" y2="370" stroke="url(#goldGrad)" stroke-width="1" stroke-opacity="0.4" />
+  <text x="400" y="395" text-anchor="middle" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="11" font-weight="500" fill="#64748b" letter-spacing="1">High-Resolution Photography Synchronizing...</text>
+</svg>

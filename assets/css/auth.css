@@ -1,0 +1,957 @@
+/**
+ * EstateVista India - Authentication & Client Dashboard Stylesheet
+ * Ultra-Luxury Styling for Login, Registration, Password Recovery & Private Dashboard
+ */
+
+/* ==========================================================================
+   1. Authentication Layout (Login, Register, Forgot & Reset Password)
+   ========================================================================== */
+.auth-page {
+    background: radial-gradient(circle at 10% 20%, rgba(197, 168, 128, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(11, 21, 40, 0.05) 0%, transparent 40%),
+                var(--beige-50);
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+}
+
+.auth-wrapper {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.auth-wrapper-wide {
+    max-width: 680px;
+}
+
+.auth-card {
+    background: var(--white);
+    border: 1px solid var(--beige-200);
+    border-radius: var(--radius-md);
+    box-shadow: 0 15px 45px rgba(11, 21, 40, 0.07);
+    padding: 2.75rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold-600) 0%, var(--gold-400) 50%, var(--gold-600) 100%);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header .brand-emblem {
+    margin: 0 auto 1rem;
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+}
+
+.auth-title {
+    font-family: var(--font-serif);
+    font-size: 1.85rem;
+    color: var(--navy-900);
+    margin: 0 0 0.5rem;
+    font-weight: 700;
+}
+
+.auth-subtitle {
+    font-size: 0.9rem;
+    color: var(--slate-500);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Alert Notification Banners */
+.auth-alert {
+    padding: 0.9rem 1.15rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.auth-alert-error {
+    background-color: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #991B1B;
+}
+
+.auth-alert-error i {
+    color: #EF4444;
+    font-size: 1rem;
+    margin-top: 0.15rem;
+}
+
+.auth-alert-success {
+    background-color: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+}
+
+.auth-alert-success i {
+    color: #10B981;
+    font-size: 1rem;
+    margin-top: 0.15rem;
+}
+
+.auth-alert-info {
+    background-color: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    color: #1E40AF;
+}
+
+.auth-alert-info i {
+    color: #3B82F6;
+    font-size: 1rem;
+    margin-top: 0.15rem;
+}
+
+/* Form Controls & Password Meter */
+.auth-form-group {
+    margin-bottom: 1.35rem;
+}
+
+.auth-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--slate-700);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+}
+
+.auth-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.auth-input-wrapper i.input-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--slate-400);
+    font-size: 0.95rem;
+    pointer-events: none;
+}
+
+.auth-input-wrapper .auth-input {
+    padding-left: 2.75rem;
+    padding-right: 2.75rem;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: var(--white);
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-sm);
+    font-size: 0.92rem;
+    color: var(--slate-900);
+    transition: all var(--transition-fast);
+}
+
+.auth-input:focus {
+    border-color: var(--gold-500);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.15);
+}
+
+.auth-toggle-pass-btn {
+    position: absolute;
+    right: 0.85rem;
+    background: none;
+    border: none;
+    color: var(--slate-400);
+    cursor: pointer;
+    padding: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    transition: color var(--transition-fast);
+}
+
+.auth-toggle-pass-btn:hover {
+    color: var(--navy-900);
+}
+
+.password-strength-bar {
+    height: 4px;
+    background-color: var(--slate-200);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.password-strength-fill {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.password-strength-text {
+    font-size: 0.72rem;
+    color: var(--slate-500);
+    margin-top: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Submit & Social Buttons */
+.btn-auth-submit {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, var(--navy-900) 0%, #16243E 100%);
+    color: var(--gold-400);
+    border: 1px solid var(--navy-800);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(11, 21, 40, 0.15);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+}
+
+.btn-auth-submit:hover {
+    background: var(--navy-950);
+    color: var(--gold-300);
+    box-shadow: 0 6px 20px rgba(11, 21, 40, 0.25);
+    transform: translateY(-1px);
+}
+
+.demo-account-box {
+    background: var(--beige-50);
+    border: 1px dashed var(--gold-400);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--slate-700);
+}
+
+.demo-account-box strong {
+    color: var(--navy-900);
+}
+
+.btn-fill-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.65rem;
+    background: var(--gold-500);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.4rem;
+    transition: background-color var(--transition-fast);
+}
+
+.btn-fill-demo:hover {
+    background: var(--gold-600);
+}
+
+.auth-footer-links {
+    text-align: center;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--beige-200);
+    font-size: 0.85rem;
+    color: var(--slate-600);
+}
+
+.auth-footer-links a {
+    color: var(--gold-600);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.auth-footer-links a:hover {
+    color: var(--gold-700);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   2. Customer Dashboard Layout
+   ========================================================================== */
+.dashboard-page {
+    background-color: var(--beige-50);
+    min-height: calc(100vh - 120px);
+    padding: 2.5rem 0 5rem;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+/* Dashboard Sidebar */
+.dash-sidebar {
+    background: var(--white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 6px 25px rgba(11, 21, 40, 0.04);
+    position: sticky;
+    top: 96px;
+}
+
+.dash-user-card {
+    background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 100%);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: var(--white);
+    position: relative;
+}
+
+.dash-user-avatar {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    margin: 0 auto 0.85rem;
+    border: 2px solid var(--gold-400);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dash-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dash-user-name {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    color: var(--white);
+}
+
+.dash-user-email {
+    font-size: 0.78rem;
+    color: var(--slate-400);
+    word-break: break-all;
+    margin: 0 0 0.65rem;
+}
+
+.dash-vip-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(197, 168, 128, 0.15);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    color: var(--gold-400);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* Dashboard Nav Menu */
+.dash-nav-menu {
+    list-style: none;
+    padding: 0.85rem 0;
+    margin: 0;
+}
+
+.dash-nav-item {
+    margin: 0;
+}
+
+.dash-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.5rem;
+    color: var(--slate-700);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    border-left: 3px solid transparent;
+}
+
+.dash-nav-link-left {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.dash-nav-link i {
+    font-size: 1rem;
+    width: 20px;
+    color: var(--slate-400);
+    transition: color var(--transition-fast);
+}
+
+.dash-nav-link:hover {
+    color: var(--navy-900);
+    background-color: var(--beige-50);
+}
+
+.dash-nav-link:hover i {
+    color: var(--gold-600);
+}
+
+.dash-nav-link.active {
+    color: var(--navy-900);
+    background-color: var(--beige-50);
+    border-left-color: var(--gold-500);
+    font-weight: 700;
+}
+
+.dash-nav-link.active i {
+    color: var(--gold-600);
+}
+
+.dash-nav-badge {
+    background: var(--beige-100);
+    color: var(--navy-900);
+    border: 1px solid var(--beige-300);
+    font-size: 0.72rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.dash-nav-link.active .dash-nav-badge {
+    background: var(--navy-900);
+    color: var(--gold-400);
+    border-color: var(--navy-900);
+}
+
+.dash-nav-logout {
+    color: #DC2626 !important;
+    border-top: 1px solid var(--beige-200);
+    margin-top: 0.5rem;
+}
+
+.dash-nav-logout i {
+    color: #EF4444 !important;
+}
+
+/* ==========================================================================
+   3. Dashboard Content Area & KPI Cards
+   ========================================================================= */
+.dash-main-content {
+    min-width: 0;
+}
+
+.dash-welcome-banner {
+    background: linear-gradient(135deg, var(--navy-900) 0%, #16243E 100%);
+    border-radius: var(--radius-md);
+    padding: 2.25rem;
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 25px rgba(11, 21, 40, 0.08);
+}
+
+.dash-welcome-title {
+    font-family: var(--font-serif);
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    color: var(--white);
+}
+
+.dash-welcome-subtitle {
+    font-size: 0.92rem;
+    color: var(--slate-300);
+    margin: 0;
+}
+
+/* KPI Cards Grid */
+.dash-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.dash-kpi-card {
+    background: var(--white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+    box-shadow: 0 4px 15px rgba(11, 21, 40, 0.03);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.dash-kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(11, 21, 40, 0.06);
+}
+
+.dash-kpi-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-sm);
+    background: var(--beige-50);
+    border: 1px solid var(--beige-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-600);
+    font-size: 1.35rem;
+    flex-shrink: 0;
+}
+
+.dash-kpi-val {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--navy-900);
+    line-height: 1.1;
+}
+
+.dash-kpi-label {
+    font-size: 0.78rem;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-top: 0.2rem;
+}
+
+/* Dashboard Content Card Container */
+.dash-content-card {
+    background: var(--white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: 2.25rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(11, 21, 40, 0.02);
+}
+
+.dash-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+}
+
+.dash-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--navy-900);
+    margin: 0;
+}
+
+/* ==========================================================================
+   4. Saved Residences & Tables
+   ========================================================================== */
+.dash-saved-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.dash-saved-card {
+    background: var(--white);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: all var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-saved-card:hover {
+    border-color: var(--gold-400);
+    box-shadow: 0 8px 25px rgba(11, 21, 40, 0.06);
+}
+
+.dash-saved-thumb {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dash-saved-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.dash-saved-card:hover .dash-saved-thumb img {
+    transform: scale(1.04);
+}
+
+.dash-saved-price {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    background: rgba(11, 21, 40, 0.85);
+    backdrop-filter: blur(4px);
+    color: var(--gold-300);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.dash-saved-body {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dash-saved-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy-900);
+    margin: 0 0 0.35rem;
+}
+
+.dash-saved-loc {
+    font-size: 0.825rem;
+    color: var(--slate-500);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.dash-saved-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--beige-200);
+}
+
+/* Data Tables (Enquiries & Site Visits) */
+.dash-table-wrapper {
+    overflow-x: auto;
+}
+
+.dash-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+}
+
+.dash-table th {
+    background: var(--beige-50);
+    color: var(--slate-700);
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--beige-200);
+}
+
+.dash-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+    color: var(--slate-800);
+    vertical-align: middle;
+}
+
+.dash-table tr:hover td {
+    background-color: var(--surface-light);
+}
+
+.badge-inq-type {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-type-enquiry {
+    background: #EFF6FF;
+    color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+}
+
+.badge-type-callback {
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FDE68A;
+}
+
+.badge-type-visit {
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+}
+
+.badge-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-status-new {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.badge-status-contacted {
+    background: #EFF6FF;
+    color: #1E40AF;
+}
+
+.badge-status-scheduled {
+    background: #ECFDF5;
+    color: #065F46;
+}
+
+.badge-status-closed {
+    background: #F1F5F9;
+    color: #475569;
+}
+
+/* Empty State Card */
+.dash-empty-state {
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+    color: var(--slate-500);
+}
+
+.dash-empty-state i {
+    font-size: 3rem;
+    color: var(--gold-400);
+    margin-bottom: 1rem;
+}
+
+.dash-empty-state h4 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--navy-900);
+    margin: 0 0 0.5rem;
+}
+
+.dash-empty-state p {
+    font-size: 0.88rem;
+    max-width: 420px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+}
+
+/* Concierge Help Card */
+.dash-advisor-card {
+    background: linear-gradient(135deg, var(--beige-50) 0%, var(--white) 100%);
+    border: 1px solid var(--gold-300);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dash-advisor-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-500);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.dash-advisor-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   5. Responsive Media Queries
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .dash-sidebar {
+        position: static;
+    }
+
+    .dash-nav-menu {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: #F8FAFC;
+        border-top: 1px solid var(--color-border-subtle);
+        white-space: nowrap;
+    }
+
+    .dash-nav-item {
+        flex-shrink: 0;
+    }
+
+    .dash-nav-link {
+        padding: 0.55rem 1rem;
+        border-radius: var(--radius-full);
+        border: 1px solid var(--color-border-subtle);
+        background: #FFFFFF;
+        border-left: 1px solid var(--color-border-subtle);
+        font-size: 0.82rem;
+    }
+
+    .dash-nav-link.active {
+        background: var(--navy-900);
+        color: #FFFFFF;
+        border-color: var(--navy-900);
+    }
+
+    .dash-nav-link.active i {
+        color: var(--gold-400);
+    }
+
+    .dash-nav-link.active .dash-nav-badge {
+        background: var(--gold-500);
+        color: var(--navy-950);
+    }
+
+    .dash-nav-logout {
+        border-top: none;
+        margin-top: 0;
+    }
+
+    .dash-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-page {
+        padding: 1.5rem 0 3.5rem;
+    }
+
+    .dash-welcome-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem 1.25rem;
+        gap: 1.25rem;
+    }
+
+    .dash-welcome-title {
+        font-size: 1.4rem;
+    }
+
+    .dash-content-card {
+        padding: 1.25rem 1rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .dash-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .dash-card-title {
+        font-size: 1.25rem;
+    }
+
+    .dash-kpi-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .dash-saved-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .dash-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -1rem;
+        padding: 0 1rem;
+    }
+
+    .dash-table {
+        min-width: 600px;
+    }
+
+    .auth-input-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .dash-user-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .dash-user-avatar {
+        width: 64px;
+        height: 64px;
+    }
+
+    .dash-user-name {
+        font-size: 1rem;
+    }
+}

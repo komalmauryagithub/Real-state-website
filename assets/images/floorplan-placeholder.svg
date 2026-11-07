@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <pattern id="cadGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(212, 175, 55, 0.08)" stroke-width="1" />
+    </pattern>
+    <linearGradient id="fpGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e6c8" />
+      <stop offset="50%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#aa820a" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="#081020" />
+  <rect width="800" height="600" fill="url(#cadGrid)" />
+  
+  <!-- Outer Floor Walls -->
+  <rect x="60" y="60" width="680" height="480" fill="none" stroke="url(#fpGold)" stroke-width="4" />
+  
+  <!-- Internal Walls -->
+  <line x1="60" y1="260" x2="420" y2="260" stroke="url(#fpGold)" stroke-width="3" />
+  <line x1="420" y1="60" x2="420" y2="400" stroke="url(#fpGold)" stroke-width="3" />
+  <line x1="420" y1="400" x2="740" y2="400" stroke="url(#fpGold)" stroke-width="3" />
+  <line x1="260" y1="260" x2="260" y2="540" stroke="url(#fpGold)" stroke-width="3" />
+  
+  <!-- Room Labels -->
+  <text x="240" y="160" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="700" fill="url(#fpGold)" letter-spacing="1">GRAND SALON &amp; LIVING</text>
+  <text x="240" y="190" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94a3b8">1,250 SQ.FT</text>
+
+  <text x="580" y="230" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="700" fill="url(#fpGold)" letter-spacing="1">PRIMARY MASTER SUITE</text>
+  <text x="580" y="260" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94a3b8">1,100 SQ.FT</text>
+
+  <text x="160" y="400" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="url(#fpGold)" letter-spacing="1">CHEF DINING</text>
+  <text x="160" y="425" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#94a3b8">550 SQ.FT</text>
+
+  <text x="340" y="400" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="url(#fpGold)" letter-spacing="1">GUEST SUITE</text>
+  <text x="340" y="425" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#94a3b8">600 SQ.FT</text>
+
+  <text x="580" y="470" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="700" fill="url(#fpGold)" letter-spacing="1">PRIVATE SKY TERRACE</text>
+  <text x="580" y="495" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#94a3b8">800 SQ.FT</text>
+  
+  <text x="400" y="575" text-anchor="middle" font-family="'Cinzel', serif" font-size="13" font-weight="700" fill="url(#fpGold)" letter-spacing="3">ESTATEVISTA ARCHITECTURAL SCHEMATIC</text>
+</svg>

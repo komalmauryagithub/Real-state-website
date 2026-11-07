@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="cityBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a1220" />
+      <stop offset="60%" stop-color="#0f2038" />
+      <stop offset="100%" stop-color="#060b14" />
+    </linearGradient>
+    <linearGradient id="cityGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e6c8" />
+      <stop offset="50%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#aa820a" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#cityBg)" />
+  <!-- Skyline silhouettes -->
+  <path d="M 0 350 L 50 350 L 50 240 L 90 240 L 90 290 L 130 290 L 130 180 L 150 140 L 170 180 L 170 350 L 220 350 L 220 220 L 260 220 L 260 350 L 310 350 L 310 160 L 350 160 L 350 260 L 400 260 L 400 200 L 440 200 L 440 350 L 490 350 L 490 230 L 530 230 L 530 350 L 600 350 L 600 400 L 0 400 Z" fill="rgba(212, 175, 55, 0.12)" />
+  <path d="M 30 360 L 80 360 L 80 270 L 120 270 L 120 360 L 180 360 L 180 240 L 210 210 L 240 240 L 240 360 L 300 360 L 300 280 L 340 280 L 340 360 L 410 360 L 410 230 L 460 230 L 460 360 L 520 360 L 520 280 L 560 280 L 560 360 L 600 360 L 600 400 L 30 400 Z" fill="rgba(212, 175, 55, 0.22)" />
+  <text x="300" y="380" text-anchor="middle" font-family="'Cinzel', Georgia, serif" font-size="16" font-weight="700" fill="url(#cityGold)" letter-spacing="3">ESTATEVISTA DESTINATION</text>
+</svg>

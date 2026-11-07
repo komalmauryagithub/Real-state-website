@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="avBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1528" />
+      <stop offset="100%" stop-color="#060b14" />
+    </linearGradient>
+    <linearGradient id="avGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e6c8" />
+      <stop offset="50%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#aa820a" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="100" fill="url(#avBg)" />
+  <circle cx="100" cy="100" r="96" fill="none" stroke="url(#avGold)" stroke-width="2" stroke-opacity="0.6" />
+  
+  <!-- Silhouette -->
+  <circle cx="100" cy="72" r="32" fill="url(#avGold)" opacity="0.85" />
+  <path d="M 40 170 C 40 128, 68 118, 100 118 C 132 118, 160 128, 160 170 Z" fill="url(#avGold)" opacity="0.85" />
+</svg>
