@@ -18,6 +18,9 @@ AddDefaultCharset UTF-8
     # Block direct web access to internal application directories
     RewriteRule ^(config|database|scratch)/ - [F,L]
 
+    # Ensure /admin cleanly redirects to /admin/
+    RewriteRule ^admin$ admin/ [R=301,L]
+
     # Handle custom 404 routing
     ErrorDocument 404 404.php
 </IfModule>

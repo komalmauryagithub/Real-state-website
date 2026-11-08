@@ -341,26 +341,26 @@ require_once __DIR__ . '/includes/navbar.php';
                             <div class="project-specs-row">
                                 <div class="project-spec-item">
                                     <span class="project-spec-label">Configuration</span>
-                                    <span class="project-spec-val"><?= e($proj['configuration']) ?></span>
+                                    <span class="project-spec-val"><?= e($proj['configuration'] ?? $proj['project_type'] ?? 'Luxury Residences') ?></span>
                                 </div>
                                 <div class="project-spec-item">
                                     <span class="project-spec-label">Possession</span>
-                                    <span class="project-spec-val"><?= e($proj['possession_date']) ?></span>
+                                    <span class="project-spec-val"><?= e($proj['possession_date'] ?? $proj['status'] ?? 'Ready to Move') ?></span>
                                 </div>
                                 <div class="project-spec-item">
                                     <span class="project-spec-label">RERA Reg.</span>
-                                    <span class="project-spec-val" style="font-size: 0.72rem;"><?= e($proj['rera_id']) ?></span>
+                                    <span class="project-spec-val" style="font-size: 0.72rem;"><?= e($proj['rera_id'] ?? 'Certified RERA') ?></span>
                                 </div>
                             </div>
 
                             <p class="project-highlights-text">
-                                <?= e($proj['highlights']) ?>
+                                <?= e($proj['highlights'] ?? 'Architectural landmark with private luxury amenities.') ?>
                             </p>
 
                             <div class="project-footer">
                                 <div class="project-price-block">
                                     <span class="project-price-label">Investment</span>
-                                    <span class="project-price-val"><?= e($proj['starting_price_display']) ?></span>
+                                    <span class="project-price-val"><?= e($proj['starting_price_display'] ?? $proj['price_starting'] ?? 'Price on Application') ?></span>
                                 </div>
                                 <button type="button" class="btn btn-gold btn-sm open-inquiry-modal" data-property="<?= e($proj['title']) ?>" data-subject="Project Dossier: <?= e($proj['title']) ?>">
                                     <span>Download Brochure</span>
@@ -398,29 +398,29 @@ require_once __DIR__ . '/includes/navbar.php';
                         </div>
                         <div class="launch-info">
                             <div>
-                                <div class="launch-dev-tag"><?= e($launch['developer_name']) ?></div>
+                                <div class="launch-dev-tag"><?= e($launch['developer_name'] ?? 'Signature Collection') ?></div>
                                 <h3 class="launch-title"><?= e($launch['title']) ?></h3>
                                 <div class="launch-location">
                                     <i class="fa-solid fa-location-dot" style="color: var(--gold-400); margin-right: 0.4rem;"></i>
-                                    <span><?= e($launch['locality']) ?>, <?= e($launch['city_name']) ?></span>
+                                    <span><?= e($launch['locality'] ?? $launch['location'] ?? 'Prime Enclave') ?>, <?= e($launch['city_name']) ?></span>
                                 </div>
 
                                 <div class="launch-details-grid">
                                     <div class="launch-detail-item">
                                         <span>Typology</span>
-                                        <strong><?= e($launch['configuration']) ?></strong>
+                                        <strong><?= e($launch['configuration'] ?? 'Bespoke Residences') ?></strong>
                                     </div>
                                     <div class="launch-detail-item">
                                         <span>Carpet Area</span>
-                                        <strong><?= e($launch['carpet_area']) ?></strong>
+                                        <strong><?= e($launch['carpet_area'] ?? 'Expansive Area') ?></strong>
                                     </div>
                                     <div class="launch-detail-item">
                                         <span>Timeline</span>
-                                        <strong><?= e($launch['possession']) ?></strong>
+                                        <strong><?= e($launch['possession'] ?? 'Under Construction') ?></strong>
                                     </div>
                                     <div class="launch-detail-item">
                                         <span>RERA ID</span>
-                                        <strong style="font-size: 0.75rem;"><?= e($launch['rera_id']) ?></strong>
+                                        <strong style="font-size: 0.75rem;"><?= e($launch['rera_id'] ?? 'Approved RERA') ?></strong>
                                     </div>
                                 </div>
                             </div>
@@ -428,7 +428,7 @@ require_once __DIR__ . '/includes/navbar.php';
                             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.25rem;">
                                 <div>
                                     <span style="font-size: 0.7rem; text-transform: uppercase; color: var(--slate-400); letter-spacing: 0.1em; display: block;">Launch Price</span>
-                                    <strong style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--gold-400);"><?= e($launch['starting_price']) ?></strong>
+                                    <strong style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--gold-400);"><?= e($launch['starting_price'] ?? $launch['price_formatted'] ?? 'Price on Application') ?></strong>
                                 </div>
                                 <button type="button" class="btn btn-gold open-inquiry-modal" data-property="<?= e($launch['title']) ?>" data-subject="Priority Pre-Launch Allocation: <?= e($launch['title']) ?>">
                                     <i class="fa-solid fa-crown"></i>
@@ -546,14 +546,14 @@ require_once __DIR__ . '/includes/navbar.php';
                                 <i class="fa-solid fa-quote-left"></i>
                             </div>
                             <p class="testimonial-text">
-                                "<?= e($t['review']) ?>"
+                                "<?= e($t['review'] ?? $t['quote'] ?? '') ?>"
                             </p>
                         </div>
                         <div class="testimonial-author">
                             <img src="<?= e(safe_image_url($t['client_avatar'], 'avatar')) ?>" alt="<?= e($t['client_name']) ?>" class="author-avatar" loading="lazy" onerror="this.onerror=null; this.src='<?= BASE_URL ?>assets/images/avatar-placeholder.svg';">
                             <div class="author-info">
                                 <h4><?= e($t['client_name']) ?></h4>
-                                <p><?= e($t['client_title']) ?> • <?= e($t['location']) ?></p>
+                                <p><?= e($t['client_title'] ?? $t['client_role'] ?? 'Private Investor') ?><?= !empty($t['location']) ? ' • ' . e($t['location']) : '' ?></p>
                                 <?php if (!empty($t['verified_buyer'])): ?>
                                     <span class="verified-buyer-badge">
                                         <i class="fa-solid fa-circle-check"></i> Verified Acquisition

@@ -6,6 +6,7 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/fallback_data.php';
 
 /**
  * Format raw INR number into Indian Crore / Lakh string
@@ -88,13 +89,17 @@ function get_featured_properties(int $limit = 6): array {
             ");
             $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetchAll();
+            $results = $stmt->fetchAll();
+            if (!empty($results)) {
+                return $results;
+            }
         } catch (PDOException $e) {
             error_log("Query error in get_featured_properties: " . $e->getMessage());
         }
     }
 
-    return [];
+    // High-resolution fallback luxury properties
+    return array_slice(get_fallback_properties(), 0, $limit);
 }
 
 /**
@@ -120,7 +125,7 @@ function get_cities_list(): array {
         }
     }
     
-    return [];
+    return get_fallback_cities();
 }
 
 /**
@@ -138,7 +143,7 @@ function get_testimonials_list(): array {
         }
     }
     
-    return [];
+    return get_fallback_testimonials();
 }
 
 
@@ -164,7 +169,7 @@ function get_luxury_projects(): array {
         }
     }
 
-    return [];
+    return get_fallback_projects();
 }
 
 /**
@@ -202,7 +207,7 @@ function get_articles(): array {
         }
     }
 
-    return [];
+    return get_fallback_articles();
 }
 
 /**
@@ -250,7 +255,7 @@ function get_property_categories(): array {
             error_log("Categories query error in get_property_categories: " . $e->getMessage());
         }
     }
-    return [];
+    return get_fallback_categories();
 }
 
 /**
@@ -296,7 +301,7 @@ function get_new_launches(): array {
             error_log("Error in get_new_launches: " . $e->getMessage());
         }
     }
-    return [];
+    return get_fallback_new_launches();
 }
 
 /**
@@ -613,32 +618,36 @@ function search_properties_advanced(array $filters = [], string $sort = 'relevan
             $dataStmt->execute();
             $properties = $dataStmt->fetchAll();
 
-            $totalPages = (int)ceil($totalCount / $per_page);
-
-            return [
-                'properties'   => $properties,
-                'total'        => $totalCount,
-                'pages'        => max(1, $totalPages),
-                'current_page' => $page,
-                'per_page'     => $per_page,
-                'sort'         => $sort,
-                'filters'      => $filters
-            ];
+            if (!empty($properties)) {
+                $totalPages = (int)ceil($totalCount / $per_page);
+                return [
+                    'properties'   => $properties,
+                    'total'        => $totalCount,
+                    'pages'        => max(1, $totalPages),
+                    'current_page' => $page,
+                    'per_page'     => $per_page,
+                    'sort'         => $sort,
+                    'filters'      => $filters
+                ];
+            } elseif ($db && !Database::isDemoMode() && $totalCount === 0) {
+                // Real production MySQL attached, but no rows matched user filter
+                return [
+                    'properties'   => [],
+                    'total'        => 0,
+                    'pages'        => 1,
+                    'current_page' => 1,
+                    'per_page'     => $per_page,
+                    'sort'         => $sort,
+                    'filters'      => $filters
+                ];
+            }
         } catch (PDOException $e) {
             error_log("Advanced search error: " . $e->getMessage());
         }
     }
 
-    // Return empty results if no match or error
-    return [
-        'properties'   => [],
-        'total'        => 0,
-        'pages'        => 1,
-        'current_page' => 1,
-        'per_page'     => $per_page,
-        'sort'         => $sort,
-        'filters'      => $filters
-    ];
+    // High-resolution fallback properties filtered for demo/offline resilience
+    return filter_fallback_properties($filters, $sort, $page, $per_page);
 }
 
 /**
@@ -729,7 +738,7 @@ function get_property_by_slug_or_id($identifier, ?int $allow_user_id = null): ?a
         }
     }
 
-    return null;
+    return find_fallback_property($identifier);
 }
 
 /**
@@ -763,7 +772,15 @@ function get_similar_properties($property_id, $city_id = 0, $category_id = 0, in
         }
     }
 
-    return [];
+    $all = get_fallback_properties();
+    $similar = [];
+    foreach ($all as $p) {
+        if ((int)$p['id'] !== (int)$property_id) {
+            $similar[] = $p;
+            if (count($similar) >= $limit) break;
+        }
+    }
+    return $similar;
 }
 
 /**
@@ -1079,12 +1096,21 @@ function get_all_categories(): array {
     if ($db) {
         try {
             $stmt = $db->query("SELECT * FROM categories ORDER BY id ASC");
-            return $stmt->fetchAll();
+            $rows = $stmt->fetchAll();
+            if (!empty($rows)) {
+                return $rows;
+            }
         } catch (PDOException $e) {
             error_log("Categories query error: " . $e->getMessage());
         }
     }
-    return [];
+    return [
+        ['id' => 1, 'name' => 'Sky Penthouses', 'slug' => 'penthouses'],
+        ['id' => 2, 'name' => 'Golf & Ocean Villas', 'slug' => 'villas'],
+        ['id' => 3, 'name' => 'Sea-Facing Suites', 'slug' => 'sea-facing'],
+        ['id' => 4, 'name' => 'Heritage & Mansions', 'slug' => 'heritage'],
+        ['id' => 5, 'name' => 'Luxury Apartments', 'slug' => 'apartments']
+    ];
 }
 
 /**
@@ -1095,12 +1121,22 @@ function get_all_amenities(): array {
     if ($db) {
         try {
             $stmt = $db->query("SELECT * FROM amenities ORDER BY category ASC, name ASC");
-            return $stmt->fetchAll();
+            $rows = $stmt->fetchAll();
+            if (!empty($rows)) {
+                return $rows;
+            }
         } catch (PDOException $e) {
             error_log("Amenities query error: " . $e->getMessage());
         }
     }
-    return [];
+    return [
+        ['id' => 1, 'name' => 'Private Infinity Pool', 'icon' => 'fa-water-ladder', 'category' => 'Wellness'],
+        ['id' => 2, 'name' => 'Helipad Access', 'icon' => 'fa-helicopter', 'category' => 'Executive'],
+        ['id' => 3, 'name' => 'Private Concierge', 'icon' => 'fa-bell-concierge', 'category' => 'Services'],
+        ['id' => 4, 'name' => 'Temperature-Controlled Cellar', 'icon' => 'fa-wine-bottle', 'category' => 'Lifestyle'],
+        ['id' => 5, 'name' => 'Double-Height Living Salon', 'icon' => 'fa-expand', 'category' => 'Architecture'],
+        ['id' => 6, 'name' => 'Private High-Speed Elevator', 'icon' => 'fa-elevator', 'category' => 'Security']
+    ];
 }
 
 /**

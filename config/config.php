@@ -137,6 +137,10 @@ if (!defined('BASE_URL')) {
     define('BASE_URL', $base_url);
 }
 
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(__DIR__));
+}
+
 // Currency Symbol
 if (!defined('CURRENCY_SYMBOL')) {
     define('CURRENCY_SYMBOL', '₹');
