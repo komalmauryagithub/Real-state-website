@@ -13,10 +13,10 @@ class Database {
     private static ?string $errorMessage = null;
 
     /**
-     * Get single PDO database instance
+     * Get single PDO database instance (MySQL or Safe Demo Fallback)
      */
     public static function getConnection(): ?PDO {
-        if (self::$instance === null && !self::$connectionFailed) {
+        if (self::$instance === null) {
             try {
                 $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
                 $options = [
@@ -27,10 +27,14 @@ class Database {
                 ];
 
                 self::$instance = new PDO($dsn, DB_USER, DB_PASS, $options);
-            } catch (PDOException $e) {
+            } catch (Throwable $e) {
                 self::$connectionFailed = true;
                 self::$errorMessage = $e->getMessage();
-                error_log("Database Connection Error: " . $e->getMessage());
+                error_log("Database Connection Error (MySQL): " . $e->getMessage() . " - Activating Safe Demo Fallback.");
+
+                // Activate resilient in-memory demo database fallback
+                require_once __DIR__ . '/FallbackPDO.php';
+                self::$instance = FallbackPDO::getInstance();
             }
         }
 
@@ -38,10 +42,19 @@ class Database {
     }
 
     /**
-     * Check if database is currently connected
+     * Check if database is currently connected to live MySQL
      */
     public static function isConnected(): bool {
-        return self::getConnection() !== null;
+        $inst = self::getConnection();
+        return $inst !== null && !(class_exists('FallbackPDO', false) && $inst instanceof FallbackPDO);
+    }
+
+    /**
+     * Check if running under demo fallback mode
+     */
+    public static function isDemoMode(): bool {
+        $inst = self::getConnection();
+        return class_exists('FallbackPDO', false) && $inst instanceof FallbackPDO;
     }
 
     /**
