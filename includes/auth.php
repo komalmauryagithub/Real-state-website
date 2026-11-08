@@ -80,7 +80,21 @@ function get_logged_in_user(): ?array {
     }
 
     $db = Database::getConnection();
-    if (!$db) return null;
+    if (!$db) {
+        if (!empty($_SESSION['ev_user_id']) || !empty($_SESSION['user_id'])) {
+            return [
+                'id' => (int)($_SESSION['ev_user_id'] ?? $_SESSION['user_id']),
+                'full_name' => $_SESSION['ev_user_name'] ?? 'Demo Client',
+                'email' => $_SESSION['ev_user_email'] ?? 'client@estatevistaindia.com',
+                'phone' => '+91 98200 99999',
+                'role' => 'customer',
+                'status' => 'active',
+                'avatar' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+        }
+        return null;
+    }
 
     try {
         $stmt = $db->prepare("SELECT * FROM users WHERE id = :id AND status = 'active' LIMIT 1");
@@ -104,6 +118,8 @@ function login_user(array $user): void {
         session_regenerate_id(true);
     }
 
+    $_SESSION['user_id']       = (int)$user['id'];
+    $_SESSION['logged_in']     = true;
     $_SESSION['ev_user_id']    = (int)$user['id'];
     $_SESSION['ev_user_name']  = $user['full_name'];
     $_SESSION['ev_user_email'] = $user['email'];
@@ -226,8 +242,28 @@ function register_user(array $data): array {
 }
 
 function authenticate_user(string $identity, string $password): array {
+    $identity = trim($identity);
     $db = Database::getConnection();
     if (!$db) {
+        // Fallback demo client login when database is not connected
+        if (strtolower($identity) === 'client@estatevistaindia.com' && $password === 'Password@123') {
+            $demo_user = [
+                'id' => 1,
+                'full_name' => 'Karan Malhotra',
+                'email' => 'client@estatevistaindia.com',
+                'phone' => '+91 98200 99999',
+                'role' => 'customer',
+                'status' => 'active',
+                'avatar' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+            login_user($demo_user);
+            return [
+                'success' => true,
+                'user'    => $demo_user,
+                'message' => 'Welcome back, ' . htmlspecialchars($demo_user['full_name'], ENT_QUOTES, 'UTF-8')
+            ];
+        }
         return ['success' => false, 'message' => 'Database connection unavailable.'];
     }
 

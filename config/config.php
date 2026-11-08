@@ -62,6 +62,11 @@ if (APP_ENV === 'production') {
 }
 date_default_timezone_set('Asia/Kolkata');
 
+// Ensure REQUEST_METHOD has a default
+if (empty($_SERVER['REQUEST_METHOD'])) {
+    $_SERVER['REQUEST_METHOD'] = 'GET';
+}
+
 // 3. Database configuration (Environment-driven with safe fallbacks and DATABASE_URL support)
 $db_url = getenv('DATABASE_URL') ?: ($_ENV['DATABASE_URL'] ?? null);
 if (!empty($db_url) && (str_starts_with($db_url, 'mysql://') || str_starts_with($db_url, 'mysql2://'))) {
