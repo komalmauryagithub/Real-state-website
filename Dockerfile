@@ -75,13 +75,16 @@ WORKDIR /var/www/html
 # 8. Copy Application Code into Apache Webroot
 COPY . /var/www/html/
 
-# 9. Configure Directory Permissions for Apache (www-data)
+# 9. Configure Directory Permissions for Apache (www-data) & Entrypoint
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
-    && chmod -R 775 /var/www/html/uploads
+    && chmod -R 775 /var/www/html/uploads \
+    && sed -i 's/\r$//' /var/www/html/docker-entrypoint.sh \
+    && chmod +x /var/www/html/docker-entrypoint.sh
 
-# 10. Expose Standard HTTP Port
-EXPOSE 80
+# 10. Expose Standard HTTP Port (Render binds dynamically via $PORT)
+EXPOSE 80 10000
 
-# 11. Run Apache in the Foreground
+# 11. Run Apache via dynamic entrypoint
+ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
 CMD ["apache2-foreground"]

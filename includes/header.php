@@ -34,6 +34,7 @@ $og_image = $og_image ?? (BASE_URL . 'assets/images/og-estatevista.jpg');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="theme-color" content="#0B1528">
     
     <title><?= e($full_page_title) ?></title>

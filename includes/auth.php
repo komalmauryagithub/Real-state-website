@@ -13,18 +13,27 @@ require_once __DIR__ . '/../config/database.php';
 // -----------------------------------------------------------------------------
 function init_auth_session(): void {
     if (session_status() === PHP_SESSION_NONE) {
-        // Enforce secure session cookie attributes
-        $cookieParams = [
-            'lifetime' => 86400 * 7, // 7 days
-            'path'     => '/',
-            'domain'   => '',
-            'secure'   => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on',
-            'httponly' => true,
-            'samesite' => 'Lax'
-        ];
-        session_set_cookie_params($cookieParams);
-        ini_set('session.use_strict_mode', '1');
-        session_start();
+        $is_https = (
+            (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') ||
+            (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443) ||
+            (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https') ||
+            (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && strtolower($_SERVER['HTTP_X_FORWARDED_SSL']) === 'on') ||
+            (!empty($_SERVER['HTTP_CF_VISITOR']) && str_contains($_SERVER['HTTP_CF_VISITOR'], '"scheme":"https"'))
+        );
+
+        if (!headers_sent()) {
+            $cookieParams = [
+                'lifetime' => 86400 * 7, // 7 days
+                'path'     => '/',
+                'domain'   => '',
+                'secure'   => $is_https,
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ];
+            session_set_cookie_params($cookieParams);
+            ini_set('session.use_strict_mode', '1');
+        }
+        @session_start();
     }
 }
 
